@@ -1,0 +1,82 @@
+.kakaoLogin{
+    background-color: #f7e110;
+    padding: 10px 20px;
+    width: 200px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: #f7e110 1px solid;
+    border-radius: 5px;
+    font-weight: bold;
+    margin: 10px;
+}
+
+
+.appleLogin{
+    background-color: white;
+    padding: 10px 20px;
+    width: 200px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: #dbdbdb solid 1px;
+    border-radius: 5px;
+    font-weight: bold;
+    margin: 10px;
+}
+
+.facebook{
+    background-color: #1877f2;
+    padding: 10px 20px;
+    width: 200px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: #1877f2 solid 1px;
+    border-radius: 5px;
+    font-weight: bold;
+    margin: 10px;
+    color: white;
+}
+
+.facebook i{
+    color: white;
+}
+
+.google{
+    background-color: white;
+    padding: 10px 20px;
+    width: 200px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: #dbdbdb solid 1px;
+    border-radius: 5px;
+    font-weight: bold;
+    margin: 10px;
+    color: grey;
+}
+
+.apple{
+    background-color: black;
+    padding: 10px 20px;
+    width: 200px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: black solid 1px;
+    border-radius: 5px;
+    font-weight: bold;
+    margin: 10px;
+    color: white;
+}
+
+i{
+    font-size: 20px;
+    padding: 10px;
+}

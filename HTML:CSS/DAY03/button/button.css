@@ -1,0 +1,38 @@
+.member {
+    color: #73a0b8;
+    border: #73a0b8 solid 1px;
+    border-radius: 4px;
+    background-color: white;
+}
+
+.box {
+    color: #4a4a4a;
+    border-radius: 3px;
+    border: 1px solid #c8de91;
+    background-color: #c8de91;
+    font-weight: bold;
+    font-size: medium;
+    height: 33px;
+    padding: 10px, 10px, 2px, 2px;
+}
+
+.background {
+    color: #4a4a4a;
+    border-radius: 3px;
+    border: 1px solid #98eccd;
+    background-color: #98eccd;    font-weight: bold;
+    font-size: medium;
+    height: 33px;
+    padding: 10px, 10px, 2px, 2px;
+}
+
+.typography{
+    color: #4a4a4a;
+    border-radius: 3px;
+    border: 1px solid #c8c5fe;
+    background-color: #c8c5fe;
+    font-weight: bold;
+    font-size: medium;
+    height: 33px;
+    padding: 10px, 10px, 2px, 2px;
+}
