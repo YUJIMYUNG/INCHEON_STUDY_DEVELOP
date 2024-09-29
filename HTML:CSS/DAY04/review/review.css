@@ -1,0 +1,13 @@
+.button1{
+    width: 200px;
+    height: 40px;
+    background-color: #1c99ff;
+    color: white;
+    border: 1px solid #1c99ff;
+    border-radius: 3px;
+}
+
+.button2{
+    width: 100px;
+    height: 40px;
+}
