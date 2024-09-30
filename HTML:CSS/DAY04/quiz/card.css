@@ -1,0 +1,26 @@
+.img{
+    width: 200px;
+    height: 300px;
+}
+
+.card{
+    display: flex;
+    margin : 3px;
+}
+
+.card-img {
+    width: 200px;
+    height: 200px;
+   
+}
+
+img{
+    width: 180px;
+    height: 180px;
+    border-radius: 10px;
+    margin-right: 10px;
+}
+p{
+    align-items: flex-start;
+}
+
