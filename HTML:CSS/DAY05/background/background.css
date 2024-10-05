@@ -1,0 +1,8 @@
+.box{
+    width: 200px;
+    height: 200px;
+    /* 배경사진 넣기 */
+    background-image: url("busan.jpg");
+    /* 배경사진 비율 맞추기(cover : 일부 짤리고 비율 맞추기, contain : 모두 넣고 비율 흐트리기 */
+    background-size: cover;
+}
