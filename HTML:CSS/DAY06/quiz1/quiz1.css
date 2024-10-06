@@ -1,0 +1,102 @@
+.container{
+    width: 200px;
+    height: 400px;
+}
+
+.album{
+    width: 200px;
+    height: 280px;
+    background-size: cover;
+    background-image: url(shop.gif);
+    display: flex;
+    position:relative;
+}
+
+.sailbutton{
+    background-color: black;
+    opacity: 80%;
+    width: 40px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position:absolute;
+    bottom: 0px;
+}
+
+.button2{
+    background-color: blueviolet;
+    opacity: 80%;
+    width: 30px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position:absolute;
+    bottom: 0px;
+    left: 40px;
+}
+
+.sailbutton p , .button2 p{
+    color: white;
+    font-size: 10px;
+}
+
+.heart{
+    color: white;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+
+.text{
+    padding: 10px;
+}
+
+.shop{
+    font-size: 15px;
+    font-weight: bold;
+    padding-bottom: 5px;;
+}
+
+.title{
+    padding-bottom: 5px;
+    font-size: 13px;
+}
+.toalprice{
+    display: flex;
+    font-weight: bold;
+}
+
+.box{
+    display: flex;
+}
+
+.sail{
+    color: #fc92eb;
+    padding-right: 5px;
+}
+
+.box1 {
+    width: 40px;
+    height: 20px;
+    background-color: #fff6fd;
+    font-size: 11px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #b371a9;
+    margin : 5px;
+}
+
+.box2{
+    width: 40px;
+    height: 20px;
+    background-color: rgb(217, 217, 217);
+    font-size: 11px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #727272;
+    margin : 5px;
+}

@@ -1,0 +1,36 @@
+.box{
+    width: 300px;
+    height: 100px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+}
+
+.box1{
+    background-color: turquoise;
+
+}
+.box2{
+    background-color: #2ECC71;
+    position: relative;
+}
+.box3{
+    background-color: #16A085;
+    position: relative;
+    top: 30px;
+    left: 50px;
+    z-index: 1;
+}
+.box4{
+    background-color: #27AE60;
+    /* 포지션 위치 조정 속성 top, bottom, left, right 필수 */
+    /* relative : 지금 위치에서 */
+    position: relative;
+}
+
+.text{
+    /* 부모의 position이 relative일 때 기준으로 위치가 조정됨 */
+    position: absolute;
+    top: 10px;
+    left: 20px;
+}
