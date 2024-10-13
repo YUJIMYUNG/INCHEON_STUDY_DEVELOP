@@ -2,6 +2,7 @@ header{
     width: 100vw;
     position: fixed;
 }
+
 .container{
     width: 100vw;
     height: 80px;
@@ -15,7 +16,7 @@ header{
 
 .headerTitle{
     font-size: var(--font-size-large);
-    font-weight: 700;
+    font-weight: 500;
     padding: 0px 40px;
 }
 
@@ -26,7 +27,9 @@ header{
 
     font-size: var(--font-size-large);
 }
-li{
+
+.nav ul li{
+    font-size: var(--font-size-large);
     padding: 0px 15px;
 }
 
