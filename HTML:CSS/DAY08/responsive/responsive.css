@@ -1,0 +1,49 @@
+.box{
+    width : 200px;
+    height: 200px;
+    background-color: skyblue;
+    
+}
+
+.header{
+    display: flex;
+}
+
+.links{
+    display: flex;
+}
+
+.hamberger{
+    display: none;
+
+}
+/* pc버전일 때 header 홈 어바웃 Q&A
+tablet 버전 이하 일때는 폰트어썸 햄버거로 대체하기 */
+
+@media screen and (max-width: 1280px){
+    .box{
+        background-color: red;
+        display: block;
+    }
+    .links{
+        display: none;
+    }
+    .hamberger{
+        display: block;
+    }
+}
+
+
+@media screen and (max-width : 768px){
+    .box{
+        background-color: yellow;
+        
+    }
+    .links{
+        display: none;
+    }
+    .hamberger{
+        display: block;
+    }
+    
+}
