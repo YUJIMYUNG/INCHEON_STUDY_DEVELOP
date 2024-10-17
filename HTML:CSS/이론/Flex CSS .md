@@ -12,12 +12,13 @@
 ---
 
 ```css
-.container{
-	display : flex;
-	flex-direction : row; //수평(기본)
-	flex-direction : columnl; //수직
+.container {
+  display: flex;
+  flex-direction: row; //수평(기본)
+  flex-direction: columnl; //수직
+}
 ```
 
-![image.png](Flex%20CSS%201160319e435c809cb192e5915ebcfca5/image.png)
+![image.png](./Flex%20CSS%20/image.png)
 
-![image.png](Flex%20CSS%201160319e435c809cb192e5915ebcfca5/image%201.png)
+![image1.png](./Flex%20CSS%20/image1.png)
