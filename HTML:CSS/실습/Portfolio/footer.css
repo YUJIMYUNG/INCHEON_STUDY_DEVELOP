@@ -1,0 +1,24 @@
+footer {
+  background-color: var(--color--secondary);
+  width: 100vw;
+}
+
+.footerContainer {
+  width: var(--max--width--pc);
+  height: 20vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footerBigTitle {
+  font-size: var(--font--size-x-large);
+  width: 20%;
+}
+
+.footerContentsBox {
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+}
