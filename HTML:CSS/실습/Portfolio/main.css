@@ -107,6 +107,12 @@ p {
   font-size: var(--font-size--base);
 }
 
+.work {
+  width: 100vh;
+  height: 30vh;
+  background-color: var(--color--primary);
+}
+
 @media screen and (max-width: 768px) {
   .iamBottomAllContents,
   .iamTopSection {
