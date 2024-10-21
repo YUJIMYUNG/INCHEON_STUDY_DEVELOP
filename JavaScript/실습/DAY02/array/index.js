@@ -12,3 +12,14 @@ const score = [
   [10, 11, 12],
   [54, 55, 56],
 ];
+
+console.log(score[2][0]); //54
+console.log(score[1][2]); //12
+
+const menu = [
+  { name: "아메리카노", price: 1500 },
+  { name: "라떼", price: 2500 },
+  { name: "민트모가", price: 4500 },
+];
+
+console.log(menu[1]["name"]);
