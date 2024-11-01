@@ -11,6 +11,8 @@ public class Ex01 {
             System.out.println(result);
         } catch (ArithmeticException e) {
             System.out.println("예외 발생 발생!");
+            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
 
         System.out.println("매우 중요한 코드... 실행이 안되면 아주 큰 문제 발생!!!");
