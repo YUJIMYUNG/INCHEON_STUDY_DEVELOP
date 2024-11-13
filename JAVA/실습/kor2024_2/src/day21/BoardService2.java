@@ -23,13 +23,13 @@ public class BoardService2 {
         Scanner scan = new Scanner(System.in);
 
         while (true) { // 무한루프
-            System.out.println("1. 게시물 쓰기 2. 게시물 출력 선택 : ");
+            System.out.print("1. 게시물 쓰기 2. 게시물 출력 선택 : ");
             int choose = scan.nextInt(); // 게시물 쓰기 or 출력 입력
             if (choose == 1) {
-                System.out.println("새로운 게시물 제목 : ");
+                System.out.print("새로운 게시물 제목 : ");
                 String cont = scan.next();
 
-                System.out.println("새로운 게시물 작성자 : ");
+                System.out.print("새로운 게시물 작성자 : ");
                 String writ = scan.next();
 
                 // 만약에 게시물이 비어있으면, 게시물 100개이면 if문 100개 쓰는것이 아니라 반복문 활용
