@@ -31,8 +31,4 @@ public class NewBoard { // 게시물 타입 클래스
         this.pwd = pwd;
     }
 
-    @Override
-    public String toString() {
-        return super.toString();
-    }
 }
