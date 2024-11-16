@@ -12,3 +12,4 @@ Math.abs(x) // 절대값 반환
 Math.max(a,b,c) // a,b,c 제일 큰 숫자 돌려주기
 Math.min(a,b,c) // a,b,c 제일 작은 숫자 돌려주기
 Math.pow(x,y) // x의 y제곱 -> x ** y
+
