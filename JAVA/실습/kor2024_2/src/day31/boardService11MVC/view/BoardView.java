@@ -101,7 +101,7 @@ public class BoardView {
         //1. 수정할 게시물 번호, 수정할 내용 입력받기
         System.out.print("수정할 게시물 번호");
         int updateNum = scan.nextInt();
-
+        scan.nextLine();
         System.out.print("수정할 내용");
         String updateContent = scan.nextLine();
 
