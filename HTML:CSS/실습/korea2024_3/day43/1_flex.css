@@ -1,0 +1,70 @@
+/*
+    - display : flex 속성 
+        - 하위 요소들을 배치 하는 방법 제공 
+        1. flex-wrap : nowrap / wrap
+            nowrap : [기본값] 하위 요소들이 부모 요소보다 크면 하위요소의 크기를 자동맞춤 처리 
+            wrap : 하위 요소들이 부모 요소보다 크면 자동으로 줄바꿈 처리
+        2. flex-direction : row/column
+            row : [기본값] 하위 요소들을 가로 배치
+            column : 하위 요소들을 세로 배치
+        3. justify-content : flex-start/flex-end/center
+            flex-start :  [기본값] 하위 요소들을 가로 왼쪽 정렬
+            flex-end : 하위 요소들을 가로 오른쪽 정렬 
+            center : 하위 요소들을 가로 가운데 정렬 
+
+    - 브라우저(크롬/엣지) 에서 F12(개발도구)의 해당하는 요소 CSS 에서 flexbox 편집기 활용
+*/
+
+/* .클래스명{ 속성명 : 값;  } */
+.box{
+    border : 1px solid red ; /* 구역 테두리 속성 */
+    width : 100px; /* 구역 가로 사이즈 */
+}
+.flexbox1{
+    border: 1px solid blue; width: 250px;
+    /* dispaly 속성의 flex : 하위 요소들을 배치 하는 방법 제공 */
+    display: flex;
+    flex-wrap: nowrap;  /* [기본값]만일 하위 요소들이 부모 요소보다 크면 하위요소의 크기를 자동맞춤*/
+}
+.flexbox2{
+    border: 1px solid blue; width: 250px;
+    display: flex;
+    flex-wrap: wrap;    /* 만일 하위 요소들이 부모 요소보다 크면 자동으로 줄바꿈 처리 */
+}
+.flexbox3{
+    border : 1px solid blue; width: 250px;
+    display: flex;
+    flex-direction: row; /*[기본값] 하위 요소들을 가로 배치 */
+}
+.flexbox4{
+    border : 1px solid blue; width: 250px;
+    display: flex;
+    flex-direction: column; /* 하위 요소들을 세로 배치 */
+}
+.flexbox5{
+    border : 1px solid blue;
+    display: flex;
+    justify-content : flex-start  /* [기본값] 하위 요소들을 가로 왼쪽 정렬 */
+}
+.flexbox6{
+    border : 1px solid blue;
+    display: flex;
+    justify-content: flex-end;      /* 하위 요소들을 가로 오른쪽 정렬 */
+}
+.flexbox7{ border: 1px solid blue;
+    display: flex;
+    justify-content: center;        /* 하위 요소들을 가로 가운데 정렬 */
+}
+.flexbox8{ border : 1px solid blue;
+    display: flex;
+    justify-content: space-between; /* 양쪽 끝에ㅐ 여백없이 사이 여백 균등 정렬 */
+}
+.flexbox9{ border: 1px solid blue;
+    display: flex;
+    justify-content: space-around;  /* 양쪽 끝에 여백은 사이 여백50%하고 사이 여백을 균등 정렬 */
+}
+.flexbox10{ border:  1px solid blue;
+    display: flex;
+    justify-content: space-evenly;  /* 양쪽 끝에 여백 과 사이 여백을 균등 여백 */
+}
+
