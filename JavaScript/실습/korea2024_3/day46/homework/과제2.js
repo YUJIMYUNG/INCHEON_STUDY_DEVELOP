@@ -130,10 +130,20 @@ if(sheetList[index] ==  "O"){
 }
 
 // [지문11]주차장 차량 검색대
-// 조건1(차량번호) : let carArray = [ '250어7142' , '142가7415' ] 
-// 조건2(주차위치) : let locationArray = [ 'A1' , 'B3' ]              
+// 조건1(차량번호) : 
+let carArray = [ '250어7142' , '142가7415', '123오4567' ] ;
+// 조건2(주차위치) : 
+let locationArray = [ 'A1' , 'B3', 'C4' ]              
 // 조건3 : carArray, locationArray 배열내 인덱스가 같으면 같은 차량의 정보
+
+console.log(carArray);
+console.log(locationArray);
 // 조건4 : 차량번호 입력받아 내 차량 위치 찾기 를 반환해주세요.
+let carNum = prompt("차량 번호를 입력해주세요.");
+if(carArray.includes(carNum)){
+    console.log(locationArray[carArray.indexOf(carNum)]);
+} 
+
 
 // - 정답이 필요한 경우 메일/카톡 로 요청하기. 
 // - 제출 : itdanja@kakao.com , 12/19(목) 19:00까지
