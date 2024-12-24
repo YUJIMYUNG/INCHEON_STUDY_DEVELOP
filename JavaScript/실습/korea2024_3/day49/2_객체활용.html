@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='객체활용.js'></script>
+</head>
+<body>
+
+    <div class='loginNicName'></div>
+
+    <div> <!-- div는 html에서 레이아웃/구역 나눌때 사용되는 마크업 -->
+        <h3> 회원가입 </h3> <!-- h3는 html에서 제목 표현할때 사용되는 마크업 -->
+        아이디 : <input class="signid" type="text "/> <br/> <!-- input마크업은 입력상자  , br 마크업은 줄바꿈처리-->
+        비밀번호 : <input class="signpw" type="password" /> <br/>
+        닉네임 : <input class="signnic" type="text" /> <br/>
+        <button onclick="signUp()" > 회원가입 </button>
+    </div>
+
+    <div>
+        <h3> 로그인 </h3>
+        아이디 : <input class="loginid" type="text" /> <br/>
+        비밀번호 : <input class="loginpw" type="password" /> <br/>
+        <button onclick="login()"> 로그인 </button>
+    </div>
+
+    <div class="memberListBox">
+        <h3> 회원명단 </h3>
+    </div>
+
+</body>
+</html>
