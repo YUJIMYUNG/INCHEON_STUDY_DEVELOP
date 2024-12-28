@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="과제.css">
+</head>
+<body>
+     
+    <div id="wrap"><!-- 레이아웃 전체   -->
+        
+        <h1 class="title">나만의 할 일 목록</h1>
+
+        
+        <div class="todoTop"> <!-- 상단 구역 -->
+            <input type="text" class="conInput" />
+            <button onclick="add()" class="addBtn">등록</button>
+        </div> <!-- 상단 구역 끝-->
+
+        <div class="todoBottom"> <!-- 본문 구역 -->
+
+            <div class="conBox"><!-- 하나의 컨텐츠 구역 -->
+                <div class="cont">1교시 수업 듣기</div>
+                <div class="conBtns">
+                    <button class="updateBtn">수정</button>
+                    <button class="deleteBtn">삭제</button>
+                </div>
+            </div> <!-- 하나의 컨텐츠 구역 끝 -->
+
+            <div class="conBox success">
+                <div class="cont">여행준비하기</div>
+                <div class="conBtns">
+                    <button class="updateBtn">수정</button>
+                    <button class="deleteBtn">삭제</button>
+                </div>
+            </div>
+        
+        
+        </div><!-- 본문 구역 끝-->
+
+
+
+    </div> <!-- 레이아웃 전체 끝 -->
+    
+
+    <script src="과제.js"></script>
+    
+</body>
+</html>
