@@ -22,7 +22,7 @@ function bwrite(){
         body : JSON.stringify(board), // input으로부터 입력받은 값들을 JSON형식의 문자열타입으로 전송
     }
     
-    fetch('자바컨트롤러URL', option) 
+    fetch('/day52/write', option) 
         .then(response => response.json())
         .then(date => {
             // 응답 결과에 따른 메세지 출력
@@ -38,5 +38,7 @@ function bwrite(){
 
 // 글출력 함수
 function findAll(){
-
+    fetch('/day52/findAll')
+        .then(r => r.json())
+        .then( data => {console.log(data)})
 }
