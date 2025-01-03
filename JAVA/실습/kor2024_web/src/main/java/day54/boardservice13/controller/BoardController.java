@@ -46,14 +46,26 @@ public class BoardController {
     }
 
     // 4. 게시물 수정
+    // 과제코드
+//    @PutMapping("/update")
+//    public boolean update(@RequestParam int bno, @RequestBody BoardDto updateBoardDto){
+//        System.out.println("BoardController.update");
+//        System.out.println("updateBoardDto = " + updateBoardDto);
+//        boolean result = BoardDao.getInstance().update(bno, updateBoardDto);
+//
+//        return result;
+//    }
+
+    // 수업코드
     @PutMapping("/update")
-    public boolean update(@RequestParam int bno, @RequestBody BoardDto updateBoardDto){
+    public boolean update(@RequestBody BoardDto updateBoardDto){
         System.out.println("BoardController.update");
         System.out.println("updateBoardDto = " + updateBoardDto);
-        boolean result = BoardDao.getInstance().update(bno, updateBoardDto);
+        boolean result = BoardDao.getInstance().update(updateBoardDto);
 
         return result;
     }
+
 
     // 5. 게시물 삭제
     @DeleteMapping("/delete")

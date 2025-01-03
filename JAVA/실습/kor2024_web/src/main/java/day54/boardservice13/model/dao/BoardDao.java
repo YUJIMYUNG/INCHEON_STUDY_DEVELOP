@@ -68,10 +68,7 @@ public class BoardDao {
     }
     // 3. 게시물 개별 조회
     public BoardDto findId(int bno){
-        // 개별 조회 한 게시물 담을 dto
-        BoardDto boardDto = new BoardDto();
         try {
-
             //1. SQL작성
             String sql = "select * from board where bno = ?";
 
@@ -83,37 +80,72 @@ public class BoardDao {
             ResultSet rs = ps.executeQuery();
 
             //4.SQL 결과
-            while (rs.next()) {
-                int getBno = rs.getInt("bno");
-                String getBtitle = rs.getString("btitle");
-                String getBcontent = rs.getString("bcontent");
-                String getBdate = rs.getString("bdate");
-                String getBwriter = rs.getString("bwriter");
-                String getBpwd = null;
-
-                boardDto = new BoardDto(getBno, getBtitle, getBcontent, getBdate, getBwriter, getBpwd);
-
-            } //while end
+//            while (rs.next()) {
+//                int getBno = rs.getInt("bno");
+//                String getBtitle = rs.getString("btitle");
+//                String getBcontent = rs.getString("bcontent");
+//                String getBdate = rs.getString("bdate");
+//                String getBwriter = rs.getString("bwriter");
+//                String getBpwd = null;
+//
+//                boardDto = new BoardDto(getBno, getBtitle, getBcontent, getBdate, getBwriter, getBpwd);
+//
+//            } //while end
+            if(rs.next()){
+                BoardDto boardDto = new BoardDto(
+                        rs.getInt("bno") , rs.getString("btitle"),
+                        rs.getString("bcontent"), rs.getString("bdate"),
+                        rs.getString("bwriter") , null // 패스워드는 보안상 조회시 제외
+                );
+                return boardDto;
+            }
 
 
         }catch (Exception e) {
             System.out.println(e);
         }// try-catcn end
-        return boardDto;
+        return null;
     }// findId end
 
     // 4. 게시물 수정
-    public boolean update(int bno, BoardDto updateBoardDto){
+//    public boolean update(int bno, BoardDto updateBoardDto){
+//        try{
+//            //1. SQL 작성
+//            String sql = "update board set btitle = ?, bcontent = ?, bdate = current_timestamp where bno = ?";
+//
+//            //2. SQL 기재
+//            PreparedStatement ps = conn.prepareStatement(sql);
+//
+//            //3. SQL 조작
+//            ps.setString(1, updateBoardDto.getBtitle());
+//            ps.setString(2, updateBoardDto.getBcontent());
+//
+//
+//            //4. SQL실행결과
+//            int result = ps.executeUpdate();
+//
+//            if(result == 1){
+//                return true;
+//            }// if end
+//        }catch (Exception e){
+//            System.out.println(e);
+//        }// try-catch end
+//        return false;
+//    }// update end
+
+    // 수업코드
+    public boolean update(BoardDto updateBoardDto){
         try{
             //1. SQL 작성
-            String sql = "update board set bcontent = ?, bdate = current_timestamp where bno = ?";
+            String sql = "update board set btitle = ?, bcontent = ? where bno = ?";
 
             //2. SQL 기재
             PreparedStatement ps = conn.prepareStatement(sql);
 
             //3. SQL 조작
-            ps.setString(1, updateBoardDto.getBcontent());
-            ps.setInt(2, bno);
+            ps.setString(1, updateBoardDto.getBtitle());
+            ps.setString(2, updateBoardDto.getBcontent());
+            ps.setInt(3, updateBoardDto.getBno());
 
             //4. SQL실행결과
             int result = ps.executeUpdate();
