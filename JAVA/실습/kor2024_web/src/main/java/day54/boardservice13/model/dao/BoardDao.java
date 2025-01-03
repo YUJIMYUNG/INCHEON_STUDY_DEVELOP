@@ -68,11 +68,84 @@ public class BoardDao {
     }
     // 3. 게시물 개별 조회
     public BoardDto findId(int bno){
-        // 구현하기 전
-        return null;
-    }
+        // 개별 조회 한 게시물 담을 dto
+        BoardDto boardDto = new BoardDto();
+        try {
+
+            //1. SQL작성
+            String sql = "select * from board where bno = ?";
+
+            //2. SQL 기재
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            //3. sQl 조작, 실행
+            ps.setInt(1, bno);
+            ResultSet rs = ps.executeQuery();
+
+            //4.SQL 결과
+            while (rs.next()) {
+                int getBno = rs.getInt("bno");
+                String getBtitle = rs.getString("btitle");
+                String getBcontent = rs.getString("bcontent");
+                String getBdate = rs.getString("bdate");
+                String getBwriter = rs.getString("bwriter");
+                String getBpwd = null;
+
+                boardDto = new BoardDto(getBno, getBtitle, getBcontent, getBdate, getBwriter, getBpwd);
+
+            } //while end
+
+
+        }catch (Exception e) {
+            System.out.println(e);
+        }// try-catcn end
+        return boardDto;
+    }// findId end
 
     // 4. 게시물 수정
+    public boolean update(int bno, BoardDto updateBoardDto){
+        try{
+            //1. SQL 작성
+            String sql = "update board set bcontent = ?, bdate = current_timestamp where bno = ?";
+
+            //2. SQL 기재
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            //3. SQL 조작
+            ps.setString(1, updateBoardDto.getBcontent());
+            ps.setInt(2, bno);
+
+            //4. SQL실행결과
+            int result = ps.executeUpdate();
+
+            if(result == 1){
+                return true;
+            }// if end
+        }catch (Exception e){
+            System.out.println(e);
+        }// try-catch end
+        return false;
+    }// update end
 
     // 5. 게시물 삭제
+    public boolean delete(int deleteBno){
+        try{
+            //1. SQL 작성
+            String sql = "delete from board where bno = ?";
+
+            //2. SQL 기재
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            //3. SQL 조작, 실행
+            ps.setInt(1, deleteBno);
+            int result = ps.executeUpdate();
+
+            if(result == 1){
+                return true;
+            }// if end
+        }catch (Exception e){
+            System.out.println(e);
+        }// try-catch end
+        return false;
+    }// delete end
 }
