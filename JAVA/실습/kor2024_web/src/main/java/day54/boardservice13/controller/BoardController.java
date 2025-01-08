@@ -12,7 +12,7 @@ import java.util.ArrayList;
     // 싱글톤 -
 //    private BoardController(){};
 //    private static BoardController instance = new BoardController();
-//    public static BoardController getInstance(){
+//    public static     BoardController getInstance(){
 //        return instance;
 //    }
 

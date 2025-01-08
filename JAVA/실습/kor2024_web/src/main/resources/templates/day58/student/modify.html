@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div th:replace="~{/day58/student/header.html :: header}"></div>
+
+    <div>
+        <h6>학생 명단(추후에 fetch연결)</h6>
+
+        <input>수정 할 학생번호 입력
+        <button type="button">수정하기</button>
+
+
+        <table>
+            <tr>
+                <th>번호</th>
+                <th>학생명</th>
+                <th>국어점수</th>
+                <th>수학점수</th>
+                <th>영어점수</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>유재석</td>
+                <td>90</td>
+                <td>30</td>
+                <td>80</td>
+            </tr>
+        </table>
+    </div>
+
+    <div th:replace="~{/day58/student/footer.html :: footer}"></div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div th:replace="~{/day58/student/header.html :: header}"></div>
+
+    <div>
+        <h3>학생 명단(추후에 fetch 사용해서 서버에 연결)</h3>
+        <table>
+            <tr>
+                <th>번호</th>
+                <th>학생명</th>
+                <th>국어점수</th>
+                <th>수학점수</th>
+                <th>영어점수</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>유재석</td>
+                <td>90</td>
+                <td>30</td>
+                <td>80</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>강호동</td>
+                <td>80</td>
+                <td>90</td>
+                <td>40</td>
+            </tr>
+        </table>
+    </div>
+
+    <div th:replace="~{/day58/student/footer.html :: footer}"></div>
+</body>
+</html>
