@@ -166,6 +166,94 @@ const func2 = (x:string="Guest") => 로직만들기 // x를 반환하면 자동�
     type University = Person & Student;
     ```
 
+## Typeof 연산자(`typeof`)
+
+---
+
+- 자바스크립트 기본 연산자
+- 타입을 추출할 때 사용함
+    
+    ```tsx
+    const person = {name:"홍길동", age:32}
+    
+    type Person = typeof person // {name:string, age:number}
+    ```
+    
+
+## Keyof 연산자(`keyof`)
+
+---
+
+- 오브젝트 타입의 키를 유니온 타입으로 추출
+- 오브젝트 타입의 키를 제한된 값으로 사용할 때 사용
+- **함수의 매개변수 타입을 객체의 키로 제한할 때 사용**
+    
+    ```tsx
+    type Person = { name:string, age:number, location?:string}
+    
+    keyof Person; //"name" | "age" | "location"
+    ```
+    
+
+## 인덱스 시그니처
+
+---
+
+- 오브젝트의 키를 타입 정하기
+    
+    ```tsx
+    type Pizza = { [index:string]:string }
+    
+    const cheesePizza:Pizza = { name:"치즈피자", price : "25000" }
+    
+    //예시문제
+    type StudentMathScore = { [name:string]:number};
+    
+    const classOne:StudentMathScore = {
+        kim: 50,
+        lee: 50,
+        park: 60
+    }
+    
+    //영어점수
+    type EngScore = {[name:string]:number};
+    const classTwo:EngScore = {
+        kim : 100,
+        lee: 10,
+        park : 40
+    }
+    
+    //국어점수, 등급도 갖는 배열 형태의 오브젝트로 만들기
+    type Grade = "A" | "B" | "C" | "D" | "F"; 
+    //타입 안정성을 위해서 부분집합의 개념으로 넣기
+    type KorScore = {[name:string]:number | Grade} & {grade:Grade};
+    const classTree:KorScore[] = [
+        { kim :30, grade:"F"},
+        { lee :100, grade:"A"},
+        { park :80, grade:"B"},
+    ]
+    
+    ```
+    
+
+## In 연산자(`In`)
+
+---
+
+- in 연산자는 매핑 타입에서 사용함
+- 오브젝트의 각 속성을 특정 타입 변환할 때 사용
+    
+    ```tsx
+    type Keys = "option1" | "option2" | "option3"
+    
+    type Option = {
+    	[key in Keys] : boolean
+    }
+    
+    const option:Option = {option1 : true}
+    const option1:Option = {option2: false}
+    ```
+
 # Typescript 타입 알리아스
 <aside>
 💡
@@ -213,3 +301,65 @@ const order: MaksSet = (main, sub, drink) => {
 
 const myOrder = order("빅맥","양파튀김", "스프라이드");
 ```
+
+# Typescript 제네릭
+
+<aside>
+💡
+
+**제네릭 타입은 다양한 타입을 받아주는 연산자이다.**
+
+</aside>
+
+## 문법
+
+---
+
+```tsx
+type AliasName<T> = 타입정의
+```
+
+- `AliasName`은 타입 별칭의 이름이다.
+- `<T>`는 제네릭 파라미터로, 다양한 타입을 받을 수 있게 한다.
+- `/* 타입 정의 */`  부분에 구체적인 타입을 정의한다.
+
+## 여러 제너릭 문법
+
+---
+
+```tsx
+type Pair<T, U> = {
+    first:T,
+    second:U
+}
+
+const test6:Pair<string, boolean> = {
+    first:"김떙떙",
+    second:false
+}
+```
+
+## 제너릭 제약 조건
+
+---
+
+```tsx
+type Job = "전사" | "궁수" | "마법사";
+type NewJob = "성기사" | "무법자";
+type Weapon = "검" | "활" | "지팡이";
+type Armor = "갑옷" | "철갑옷";
+
+type GameChar<T extends Job | NewJob, U extends Weapon, V extends Armor> = {
+    job : T;
+    weapon : U,
+    armor : V
+}
+
+const myChar:GameChar<NewJob, Weapon, Armor> = {
+    job: "무법자",
+    weapon : "검",
+    armor: "갑옷"
+}
+```
+
+- 제네릭 파라미터에 특정 타입을 제한할 수 있다.
