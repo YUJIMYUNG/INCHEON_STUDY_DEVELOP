@@ -26,22 +26,26 @@ public class WaitListDao {
 
     //대기명단 제일 끝번호 조회
     public int getLastNum(){
+        int lastNum = 0;
         try{
+            // 이전 대기명단엘 제일 마지막 번호 찾는 sql문
             String sql = "select max(wait_num) as last_num from waitlist";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
+
+            //last_num에 sql문으로 select한 값을 대입하기
             if(rs.next()){
-                return rs.getInt("last_num");
+               lastNum = rs.getInt("last_num");
             }
         }catch (Exception e){
            e.printStackTrace();
             System.out.println(e.getMessage());
         }
-        return 1000;
+        return lastNum + 1;
     }
 
     //1. 대기명단 등록
-    public boolean regist(WaitListDto waitListDto){
+    public int regist(WaitListDto waitListDto){
         try{
             int newWaitNum = getLastNum();
 
@@ -53,12 +57,12 @@ public class WaitListDao {
 
             int count = ps.executeUpdate();
             if(count == 1) {
-                return true;
+                return newWaitNum;
             }
         } catch (Exception e) {
             System.out.println(e.getStackTrace());
         }
-        return false;
+        return -1;
     }
 
     //2. 대기명단 목록

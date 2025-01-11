@@ -12,8 +12,8 @@ public class WaitListService {
     @Autowired private WaitListDao waitListDao;
 
     //1. 대기명단 등록
-    public boolean regist(WaitListDto waitListDto){
-        boolean result = waitListDao.regist(waitListDto);
+    public int regist(WaitListDto waitListDto){
+        int result = waitListDao.regist(waitListDto);
 
         return result;
     }

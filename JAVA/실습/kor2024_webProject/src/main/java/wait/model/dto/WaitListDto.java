@@ -12,5 +12,5 @@ public class WaitListDto {
     private int gno;
     private String gphone;
     private int gpersonel;
-    private int waite_num;
+    private int wait_num;
 }

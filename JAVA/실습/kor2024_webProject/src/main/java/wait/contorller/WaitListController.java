@@ -17,11 +17,11 @@ public class WaitListController {
 
     //1. 대기명단 등록
     @PostMapping("/regist.do")
-    public boolean regist(@RequestBody WaitListDto waitListDto) {
+    public int regist(@RequestBody WaitListDto waitListDto) {
         System.out.println("WaitListController.regist");
         System.out.println("waitListDto = " + waitListDto);
 
-        boolean result = waitListService.regist(waitListDto);
+        int result = waitListService.regist(waitListDto);
 
         return result;
     }
