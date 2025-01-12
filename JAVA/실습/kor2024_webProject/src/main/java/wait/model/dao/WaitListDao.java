@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 import wait.model.dto.WaitListDto;
 import wait.model.response.WaitListResponse;
 
-import javax.xml.transform.Result;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -171,8 +170,9 @@ public class WaitListDao {
         ArrayList<WaitListDto> list = new ArrayList<>();
 
         try{
-            // 조회된 전화번호 
-            String sql = "select * from waitlist where gphone = ?";
+            System.out.println("입력된 전화번호 형식: [" + gphone + "]");
+
+            String sql = "select * from waitlist where trim(gphone) = trim(?) and wait_state = 1";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, gphone);
             ResultSet rs = ps.executeQuery();
@@ -185,7 +185,10 @@ public class WaitListDao {
                 System.out.println("mypage 데이터 확인" + waitListDto);
             } // while end
 
-            // 조회된 전화번호에 대한 정보가 없는지 확인
+            if(list.isEmpty()) {
+                System.out.println("전화번호 없음");
+            }
+
         }catch (Exception e){
             System.out.println(e.getMessage());
         } // try- catch end
