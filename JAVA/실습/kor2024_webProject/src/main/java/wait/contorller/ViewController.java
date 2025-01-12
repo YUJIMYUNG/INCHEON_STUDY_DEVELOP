@@ -15,4 +15,14 @@ public class ViewController {
     public String list(){
         return "/list.html";
     }
+
+    @GetMapping("/delete")
+    public String delete(){
+        return "/delete.html";
+    }
+
+    @GetMapping("/mypage")
+    public String mypage(){
+        return "/mypage.html";
+    }
 }
