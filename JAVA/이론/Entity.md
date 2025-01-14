@@ -20,6 +20,62 @@
 - 관례적으로 테이블 하나당 pk(식별자) 필드는 1개 이상어야 한다.
 - `@Id`  : 해당하는 필드/ 멤버변수를 primary key 로 정의한다.
 - `@Column` : 해당하는 필드/멤버변수를 테이블 열(속성/필드) 로 정의한다.
+    - 자료형 타입을 자동으로 변환해준다.
+        
+        
+        | 자바 | mysql |
+        | --- | --- |
+        | int | int |
+        | boolean | bit |
+        | byte | tinyint |
+        | short | smallint |
+        | char | char(1) |
+        | float | float |
+        | double | double |
+        | long | bigint |
+        | String | varchar(255) |
+    - `@Column(columnDefinition  = “DB Type”)` : 자동변환되는 mysql type이 아닌 내가 설정해주고 싶은 type으로  설정한다.
+    - `@Column( nullable = “true/false”)` : null 속성에 관한 정의
+    - `@Column( unique = “true/false”)` : unique 속성에 관한 정의
+    - **unsigned 에 관련된 어노테이션**
+        
+        PA/Spring Data JPA에서 unsigned 속성을 직접적으로 지정하는 기본 어노테이션은 없습니다. 하지만 @Column 어노테이션의 columnDefinition 속성을 사용해서 unsigned를 지정할 수 있습니다.
+        
+        예시 코드를 보여드리겠습니다:
+        
+        ```java
+        java
+        Copy
+        @Entity
+        public class Example {
+            @Id
+            @Column(columnDefinition = "BIGINT UNSIGNED")
+            private Long id;
+        
+        // or
+        
+            @Id
+            @Column(columnDefinition = "INT UNSIGNED")
+            private Integer id;
+        }
+        
+        ```
+        
+        주의할 점:
+        
+        1. 이 방식은 데이터베이스에 종속적입니다. MySQL에서는 작동하지만 다른 데이터베이스에서는 지원하지 않을 수 있습니다.
+        2. JPA 명세에는 unsigned 데이터 타입이 포함되어 있지 않기 때문에, 실제 Java 객체에서는 signed 타입(Long, Integer 등)을 사용해야 합니다.
+        3. 만약 데이터베이스의 unsigned 값이 Java의 signed 타입의 범위를 초과할 경우 오버플로우가 발생할 수 있으므로 주의가 필요합니다.
+        
+        데이터베이스의 이식성을 고려한다면, unsigned 대신 더 큰 범위의 signed 타입을 사용하는 것을 고려해볼 수 있습니다.
+        
+    
+
+### 추가 Entity 관련 어노테이션
+
+- `@Table` : 테이블의 열(속성/필드) 매핑 정의한다. 생략할 경우 자동으로 테이블명이 생성된다.
+    - `@Table (name = “테이블명”)`
+- `@GeneratedValue( strategy = GenerationType.IDENTITY)` : auto_crement, mysql의 제약조건 중 하나로서 자동번호를 부여한다.
 
 ## Entity와 테이블을 어떻게 처리할지 설정 옵션
 
