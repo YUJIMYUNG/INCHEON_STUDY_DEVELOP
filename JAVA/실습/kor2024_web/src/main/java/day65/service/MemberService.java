@@ -8,11 +8,9 @@ import day65.repository.MemberRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.lang.reflect.Member;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -64,6 +62,8 @@ public class MemberService {
         return null;
     }// myBoardList end
 
+
+    // 글 작성하기
     @Transactional // 함수 안에서 insert, update, delete 쿼리문을 트랜잭션으로 사용
     public boolean myBoardWrite(@RequestBody BoardDto boardDto){
         // 현재 로그인된 회원이 게시물을 작성한다는 가정
