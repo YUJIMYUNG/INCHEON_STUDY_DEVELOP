@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/signup.css">
 </head>
 <body>
 
@@ -14,17 +14,29 @@
         <h3>회원가입 페이지</h3>
 
         <!-- 아이디, 비밀번호, 비밀번호 확인, 이믈, 이메일 입력창 -->
-        <div class="login">
+        <div class="signup">
             <form>
                 <div class="group">
-                  <input type="text"><span class="highlight"></span><span class="bar"></span>
+                  <input type="text" class="midInput"><span class="highlight"></span><span class="bar"></span>
                   <label>ID</label>
                 </div>
                 <div class="group">
-                  <input type="password"><span class="highlight"></span><span class="bar"></span>
+                  <input type="password" class="mpwdInput"><span class="highlight"></span><span class="bar"></span>
                   <label>PASSWORD</label>
                 </div>
-                <button type="button" class="button buttonBlue">LOGIN
+                <div class="group">
+                  <input type="password" class="mpwdConfirmInput"><span class="highlight"></span><span class="bar"></span>
+                  <label>PASSWORD CONFIRM</label>
+                </div>
+                <div class="group">
+                  <input type="text" class="mnameInput"><span class="highlight"></span><span class="bar"></span>
+                  <label>NAME</label>
+                </div>
+                <div class="group">
+                  <input type="email" class="memailInput"><span class="highlight"></span><span class="bar"></span>
+                  <label>E-MAIL</label>
+                </div>
+                <button type="button" class="button buttonBlue" onclick="onSignup()">SIGN UP
                   <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
                 </button>
               </form>
@@ -32,5 +44,6 @@
           
     </div>
     
+    <script src="/js/member/signup.js"></script>
 </body>
 </html>
