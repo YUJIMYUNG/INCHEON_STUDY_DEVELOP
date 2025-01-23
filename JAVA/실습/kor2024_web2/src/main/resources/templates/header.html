@@ -25,17 +25,8 @@
               <!-- 헤더(왼쪽) 메뉴들 -->
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link" href="/member/signup">회원가입</a>
-                  </li>
 
-                  <li class="nav-item">
-                    <a class="nav-link" href="/member/login">로그인</a>
-                  </li>
-
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">게시판</a>
-                  </li>
+                  <li class="nav-item"><a class="nav-link" href="#">게시판</a></li>
 
                   <!-- 드랍 메뉴 -->
                   <li class="nav-item dropdown">
@@ -53,14 +44,21 @@
 
 
                 <!-- 오른쪽 메뉴 구역 -->
-                <form class="d-flex" role="search">
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <!-- <form class="d-flex" role="search"> -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 memberBox">
+                  <li class="nav-item"><a class="nav-link" href="/member/signup">회원가입</a> </li>
+                  <li class="nav-item"><a class="nav-link" href="/member/login">로그인</a></li>
+                </ul>
+
+                  <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                   <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+                </form> -->
               </div>
             </div>
           </nav>
     </div>
+
+    <script src="/js/header.js"></script>
 
     <!-- 부트스트랩 js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

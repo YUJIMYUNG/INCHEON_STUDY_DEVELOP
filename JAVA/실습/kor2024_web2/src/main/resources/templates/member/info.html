@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+
+    <div th:replace="~{ /header.html :: header }"></div>
+
+    <div>
+        <h3>마이페이지</h3>
+
+        <!-- 아이디, 이름, 이메일 -->
+        <div class="info">
+            <form>
+                <div class="group">
+                    <span class="highlight"></span><span class="bar"></span>
+                    <label>ID</label>
+                </div>
+                <div class="group">
+                    <span class="highlight"></span><span class="bar"></span>
+                    <label>NAME</label>
+                </div>
+                <div class="group">
+                    <span class="highlight"></span><span class="bar"></span>
+                    <label>EMAIL</label>
+                </div>
+
+                <button type="button" class="button buttonBlue" onclick="onSignup()">UPDATE
+                    <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+                </button>
+
+
+                <button type="button" class="button buttonBlue" onclick="onSignup()">DELETE
+                    <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+                </button>
+
+                </form>
+        </div>
+
+    </div>
+
+    <script src="/js/member/info.js"></script>
+    
+</body>
+</html>
