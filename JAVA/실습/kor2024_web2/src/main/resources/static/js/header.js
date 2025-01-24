@@ -26,10 +26,11 @@ const getLoginMid = () => {
 
             } else {
                 console.log("로그인 상태");
-                // 로그아웃 버튼, 마이페이지버튼, 로그인된 아이티 활성화
+                // 로그아웃 버튼, 마이페이지버튼, 로그인된 아이디, 로그인된 아이디의 포인트 정보 활성화
                 html += `
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 memberBox">
                     <li class="nav-item"> ${data} 님 </li>
+                    <li class="nav-item"> 현재 포인트 : ${data}</li>
                     <li class="nav-item"><a class="nav-link" href="#" onclick=logout()>로그아웃</a> </li>
                     <li class="nav-item"><a class="nav-link" href="/member/info">마이페이지</a></li>
                 </ul>`;

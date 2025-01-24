@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import korweb.model.dto.MemberDto;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity @Setter @Getter @Builder @ToString
 @NoArgsConstructor @AllArgsConstructor
 @Table(name = "member")
@@ -33,5 +36,10 @@ public class MemberEntity extends BaseTime {
                 .mname(this.mname)
                 .build();
     }
+
+    @OneToMany(mappedBy = "memberEntity", cascade = CascadeType.ALL)
+    @Builder.Default
+    List<PointEntity> pointEntityList = new ArrayList<>();
+
 
 }

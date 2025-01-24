@@ -11,35 +11,25 @@
     <div th:replace="~{ /header.html :: header }"></div>
 
     <div>
-        <h3>마이페이지</h3>
+        <h3>내 정보 수정하기</h3>
 
         <!-- 아이디, 이름, 이메일 -->
-        <div class="info">
+        <div class="update">
             <form>
                 <div class="group">
                     <input type="text" readonly value="" class="midInput"><span class="highlight"></span><span class="bar"></span>
                     <label>ID</label>
                 </div>
                 <div class="group">
-                    <input type="text" readonly value="" class="mpointInput"><span class="highlight"></span><span class="bar"></span>
-                    <label>POINT</label>
-                </div>
-                <div class="group">
-                    <input type="text" readonly value="" class="mnameInput"><span class="highlight"></span><span class="bar"></span>
+                    <input type="text"  value="" class="mnameInput"><span class="highlight"></span><span class="bar"></span>
                     <label>NAME</label>
                 </div>
                 <div class="group">
-                    <input type="text" readonly value="" class="memailInput"><span class="highlight"></span><span class="bar"></span>
+                    <input type="text"  value="" class="memailInput"><span class="highlight"></span><span class="bar"></span>
                     <label>EMAIL</label>
                 </div>
 
-
-                <button type="button" class="button buttonBlue" onclick="location.href='/member/update'">UPDATE
-                    <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
-                </button>
-
-
-                <button type="button" class="button buttonBlue" onclick="onDeleteMyAccount()">DELETE ACCOUNT
+                <button type="button" class="button buttonBlue" onclick="onUpdateAccount()">UPDATE COMPLETE
                     <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
                 </button>
 
@@ -48,7 +38,8 @@
 
     </div>
 
-    <script src="/js/member/info.js"></script>
+    <script src="/js/member/update.js"></script>
+
     
 </body>
 </html>

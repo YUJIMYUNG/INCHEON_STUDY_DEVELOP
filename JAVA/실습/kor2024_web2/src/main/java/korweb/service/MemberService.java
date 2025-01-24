@@ -4,20 +4,23 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import korweb.model.dto.MemberDto;
+import korweb.model.dto.PointDto;
 import korweb.model.entity.MemberEntity;
+import korweb.model.entity.PointEntity;
 import korweb.model.repository.MemberRepository;
+import korweb.model.repository.PointRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
-
-import java.util.List;
-import java.util.Objects;
 
 @Service
 public class MemberService {
 
     @Autowired
     private MemberRepository memberRepository;
+
+    @Autowired
+    private PointRepository pointRepository;
 
 
     // 1. 회원가입 서비스
@@ -31,6 +34,7 @@ public class MemberService {
         MemberEntity saveEntity = memberRepository.save(memberEntity);
 
         if(saveEntity.getMno() > 0 ) {
+            givePoint(memberDto.getMid(), 100, "신규 회원가입 포인트 지급");
             return true;
         } else {
             return false;
@@ -62,6 +66,7 @@ public class MemberService {
         if(result == true){
             System.out.println("로그인 성공");
             setSession(memberDto.getMid()); // 로그인성공시 세션에 아이디 저장
+            givePoint(memberDto.getMid(), 1, "로그인 포인트 지급");
             return true;
         } else {
             System.out.println("로그인 실패");
@@ -152,5 +157,42 @@ public class MemberService {
         }
         return false;
     }// myUpdate end
+
+    // 포인트를 지급하는 함수
+    @Transactional
+    public boolean givePoint(String mid, int pcount, String pcontent) {
+        // 회원 엔티티 조회
+        MemberEntity memberEntity = memberRepository.findByMid(mid);
+
+        // pointdto 생성(로그인혹은 회원가입에 따른 포인트, 지급내역 저장함)
+        PointDto pointDto = PointDto.builder()
+                .pcontent(pcontent)
+                .pcount(pcount)
+                .build();
+
+        //entity변환하고 그 entity에 저장함
+        PointEntity pointEntity = pointDto.toPointEntity();
+        pointEntity.setMemberEntity(memberEntity);
+        pointRepository.save(pointEntity);
+
+        return true;
+    }
+
+    // 8. 현재 내 포인트 조회 서비스
+    public PointDto printMyPoint(){
+        // 현재 세션에 저장된 회원 아이디 조회
+        String mid = getSession();
+        // 로그인 상태이면 회원아이디로 point엔티티 조회
+        if(mid != null ) {
+            // 3. 회원 아이디로 엔티티 조회
+            PointEntity pointEntity = pointRepository.findByMid(mid);
+            // 4. 엔티티를 Dto로 변환
+            PointDto pointDto = pointEntity.toPointDto();
+            // 5. 반환
+            return pointDto;
+        }
+        return null;
+    }
+
 
 }
