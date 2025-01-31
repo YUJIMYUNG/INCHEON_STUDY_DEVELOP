@@ -22,6 +22,9 @@ public class PointEntity extends BaseTime{
     @Column(columnDefinition = "varchar(30)", nullable = false)
     private String pcontent;
 
+    @Column(columnDefinition = "varchar(20)", nullable = false)
+    private int mid;
+
     @ManyToOne //fk
     @JoinColumn MemberEntity memberEntity;
 

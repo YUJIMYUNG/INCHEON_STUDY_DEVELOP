@@ -15,8 +15,16 @@ public class MemberController {
     @Autowired
     private MemberService memberService;
 
+    // 1. 회원가입
+//    @PostMapping("/member/signup.do")
+//    public boolean signup(@RequestBody MemberDto memberDto){
+//        return memberService.signup(memberDto);
+//    }
+
+    // 1-1. 첨부파일이 포함된 회원가입 HTTP 매핑
+    // 첨부파일은 JSON타입이 아닌 multipart/form-data 타입으로 @RequestBody를 사용하지 않는다.
     @PostMapping("/member/signup.do")
-    public boolean signup(@RequestBody MemberDto memberDto){
+    public boolean signup(MemberDto memberDto){
         return memberService.signup(memberDto);
     }
 
@@ -55,11 +63,15 @@ public class MemberController {
         return memberService.myUpdate(memberDto);
     }
 
-    // 8. 현재 내 포인트 조회 서비스
-    @GetMapping("/member/login/mypointinfo.do")
-    public PointDto printMyPoint() {
-        return memberService.printMyPoint();
+    // [10] 내 포인트 지급 전제 내역 조회
+    @GetMapping("/member/point/list.do")
+    public List<PointDto> pointList(){
+        return memberService.pointList();
     }
-
+    // [11] 현재 내 포인트 조회
+    @GetMapping("/member/point/info.do")
+    public int pointInfo(){
+        return memberService.pointInfo();
+    }
 
 }
