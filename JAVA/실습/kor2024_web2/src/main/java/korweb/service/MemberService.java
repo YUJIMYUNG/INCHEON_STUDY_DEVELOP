@@ -29,7 +29,7 @@ public class MemberService {
         // 프로필 사진 첨부파일이 존재하면 업로드 진행
         // (1) 만약에 업로드 파일이 비어있으면 dto에 'default.jpg'로 임시 프로필사진을 등록한다.
         if(memberDto.getUploadfile().isEmpty()){
-            memberDto.setMimg("default.jpeg");
+            memberDto.setMimg("default.jpg");
         } else { // (2) 업로드 파일이 존재하면
             // 파일 서비스 객체 내 업로드 함수를 호출한다.
             String fileName = fileService.fileUpload(memberDto.getUploadfile()); // 업로드 함수에 multipart 객체를 호출한다.

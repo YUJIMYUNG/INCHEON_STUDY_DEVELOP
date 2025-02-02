@@ -46,6 +46,21 @@ input {
 
 input:focus { outline: none; }
 
+.file-input-group {
+    position: relative;
+    margin-bottom: 45px;
+}
+
+.file-input-group input[type="file"] {
+    padding-top: 20px;  /* 라벨과 겹치지 않도록 상단 여백 추가 */
+}
+
+.file-input-group label {
+    top: -10px;  /* 라벨을 항상 위에 고정 */
+    transform: scale(.75);
+    color: #CF8E4A;
+}
+
 
 /* Label */
 
@@ -61,13 +76,15 @@ label {
 }
 
 
+
+
 /* active */
 
 input:focus ~ label, input.used ~ label {
 	top: -20px;
-  transform: scale(.75); left: -2px;
-	/* font-size: 14px; */
-	color: #CF8E4A;
+    transform: scale(.75);
+    left: -2px;
+    color: #CF8E4A;
 }
 
 

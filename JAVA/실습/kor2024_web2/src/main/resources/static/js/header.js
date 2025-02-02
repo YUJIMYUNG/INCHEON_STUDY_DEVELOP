@@ -9,7 +9,7 @@ const getLoginMid = () => {
     let memberBox = document.querySelector(".memberBox");
     let html = '';
 
-    fetch('member/myinfo.do', option)
+    fetch('/member/login/myinfo.do', option)
         // .then(response => response.json())
         .then(response => response.json()) // spring controller에서 string 타입으로 반환할 경우에는 Text()로 반환해야한다.
         .then(data => {
@@ -20,17 +20,20 @@ const getLoginMid = () => {
             html += `
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 memberBox">
                 <li class="nav-item"> 
-                    <img src="/img/${data.mimg}" style="width:70px; border-radius:20px;" />
+                    <img src="/img/${data.mimg}" style="width:70px; border-radius:20px; padding :1px; object-fit:cover; border:1px solid #bfbebe;" />
                     ${data.mid} 님
+                    <span class="pointbox"></span>
                     </li>
-                <li class="nav-item"> 현재 포인트 : ${data}</li>
-                <li class="nav-item"><a class="nav-link" href="#" onclick=logout()>로그아웃</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#" onclick="logout()">로그아웃</a> </li>
                 <li class="nav-item"><a class="nav-link" href="/member/info">마이페이지</a></li>
             </ul>`;
         
 
-            // 출력하기
+            // 출력하기delete.do
             memberBox.innerHTML = html;
+
+            // 포인트 지급 함수 불러오기
+            myPointInto();
         }
         
         ) 
@@ -66,6 +69,7 @@ const logout = () =>{
             if(data == true) {
                 alert('로그아웃 성공')
                 location.href= '/';
+                getLoginMid(); // 헤더 상태를 다시불러오기
             } else {
                 alert("로그인 실패")
             } // if-else end
@@ -74,3 +78,20 @@ const logout = () =>{
 }// logout()end
 
 
+// [3] 내 포인트 함수
+const myPointInto =  ( ) =>{
+    // 1. fetch option
+    const option = { method : 'GET' }
+    // 2. fetch
+     fetch( '/member/point/info.do' , option )
+        .then( response => response.json() )
+        .then( data => {
+                  // 1. 출력할 위치 DOM 가져오기
+              let pointbox = document.querySelector('.pointbox')
+                  // 2.
+              let html =`${ data } Point `
+                // 3. 출력하기
+              pointbox.innerHTML = html;
+        })
+        .catch( e => { console.log(e); })
+}

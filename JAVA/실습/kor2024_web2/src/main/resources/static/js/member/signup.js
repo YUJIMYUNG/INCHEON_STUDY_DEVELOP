@@ -1,3 +1,22 @@
+document.addEventListener('DOMContentLoaded', function() {
+    // 모든 input 필드를 찾아서 이벤트 리스너 추가
+    const inputs = document.querySelectorAll('input');
+    
+    inputs.forEach(input => {
+        // 초기 로드시 값이 있으면 used 클래스 추가
+        if (input.value) input.classList.add('used');
+        
+        // input에 포커스가 있거나 값이 있을 때 처리
+        input.addEventListener('blur', function() {
+            if (input.value.length > 0) {
+                input.classList.add('used');
+            } else {
+                input.classList.remove('used');
+            }
+        });
+    });
+});
+
 /*
 // 1. 프로필사진 업로드 전 회원가입 함수
 
