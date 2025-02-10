@@ -53,6 +53,11 @@ public class ViewController {
     }
 
 
+    @GetMapping("/board/view")
+    public String boardView() {
+        return "/board/view.html";
+    }
+
 
 
 

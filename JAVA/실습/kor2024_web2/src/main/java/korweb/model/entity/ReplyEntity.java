@@ -13,18 +13,19 @@ import lombok.*;
 @Table(name = "reply")
 public class ReplyEntity extends BaseTime{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int rno; // 댓글 번호
+    @GeneratedValue( strategy = GenerationType.IDENTITY )
+    private int rno; // 1. 댓글번호
 
-    @Column(columnDefinition ="varchar(255)", nullable = false)
-    private String rcontent; // 댓글 내용
+    @Column( nullable = false , columnDefinition = "varchar(255)" )
+    private String rcontent; // 2. 댓글내용
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "mno")
-    private MemberEntity memberEntity; // 댓글 작성자(fk)
+    // 3. 댓글작성자 : 작성자번호 : 단방향
+    @ManyToOne( cascade = CascadeType.ALL )
+    @JoinColumn( name = "mno" )
+    private MemberEntity memberEntity;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "bno")
-    private BoardEntity boardEntity; // 댓글 게시물 번호(fk)
-
+    // 4. 게시물번호 : 단방향
+    @ManyToOne( cascade = CascadeType.ALL )
+    @JoinColumn( name = "bno")
+    private BoardEntity boardEntity;
 }

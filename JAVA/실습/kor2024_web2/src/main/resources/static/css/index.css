@@ -11,3 +11,19 @@
     font-family: 'Paperlogy-8ExtraBold';
 }
 
+.infobox {
+    margin: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.btitle {
+    text-align: center;
+}
+
+.bcontent {
+    margin : 10px;
+    min-height: 300px; /* 최소높이 */
+}

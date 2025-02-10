@@ -1,6 +1,7 @@
 package korweb.model.entity;
 
 import jakarta.persistence.*;
+import korweb.model.dto.BoardDto;
 import lombok.*;
 
 @Entity
@@ -12,27 +13,44 @@ import lombok.*;
 @AllArgsConstructor
 @Table(name = "board")
 public class BoardEntity extends BaseTime{
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int bno;
+    @GeneratedValue( strategy = GenerationType.IDENTITY )
+    private int bno; // 1. 게시물번호 (PK)
 
-    @Column(columnDefinition = "varchar(255)", nullable = false)
-    private String btitle; // 게시물 제목
+    @Column( nullable = false , columnDefinition = "varchar(255)" )
+    private String btitle;  // 2. 게시물제목
 
-    @Column(columnDefinition = "longText")
-    private String bcontent; // 게시물 내용
+    @Column( columnDefinition = "longtext" )
+    private String bcontent; // 3. 게시물내용
 
-    @Column(columnDefinition = "int")
-    private int bview; // 게시물 조회수
+    // 4. 게시물조회수
+    @Column
+    private int bview;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "mno")
-    private MemberEntity memberEntity; // 작성자번호(fk)
+    // 5. 작성자번호(FK) : 단방향
+    @ManyToOne( cascade = CascadeType.ALL )
+    @JoinColumn( name = "mno")
+    private MemberEntity memberEntity;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cno")
-    private CategoryEntity categoryEntity; // 카테고리번호(fk)
+    // 6. 카테고리번호(FK)  : 단방향
+    @ManyToOne( cascade = CascadeType.ALL )
+    @JoinColumn( name = "cno")
+    private CategoryEntity categoryEntity;
 
+    // + entity --> Dto 변환 메소드
+    // 데이터베이스에 저장된 entity 를 조회한 후 dto로 변환해야 하므로 필요하다.
+    public BoardDto toDto(){
+        return BoardDto.builder()
+                .bno( this.bno )
+                .btitle( this.btitle )
+                .bcontent( this.bcontent )
+                .bview( this.bview )
+                .mno( this.memberEntity.getMno() )
+                .cno( this.categoryEntity.getCno() )
+                .mid( this.memberEntity.getMid() )
+                .cname( this.categoryEntity.getCname() )
+                .cdate( this.getCdate().toString() )
+                .build();
+    }
 
 }
