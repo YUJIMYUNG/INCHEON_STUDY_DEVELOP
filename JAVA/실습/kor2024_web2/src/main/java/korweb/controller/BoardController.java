@@ -1,6 +1,7 @@
 package korweb.controller;
 
 import korweb.model.dto.BoardDto;
+import korweb.model.dto.PageDto;
 import korweb.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,10 +18,16 @@ public class BoardController {  @Autowired private BoardService boardService; //
         return boardService.boardWrite( boardDto);
     }
 
-    // [2] 게시물 전체 조회
+    // [2] 게시물 전체 조회 - 카테고리별
+//    @GetMapping("/board/findall.do")
+//    public List<BoardDto> boardFindAll( @RequestParam int cno ){ // 조회할 카테고리번호
+//        return boardService.boardFindAll( cno );
+//    }
+
+    // [2] 게시물 전체 조회 - 카테고리별 + 페이징처리까지
     @GetMapping("/board/findall.do")
-    public List<BoardDto> boardFindAll( @RequestParam int cno ){ // 조회할 카테고리번호
-        return boardService.boardFindAll( cno );
+    public PageDto boardFindAll(@RequestParam int cno, @RequestParam int page){ // 조회할 카테고리번호
+        return boardService.boardFindAll( cno, page );
     }
 
     // [3] 게시물 특정(개별) 조회
