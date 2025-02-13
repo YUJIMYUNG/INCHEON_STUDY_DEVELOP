@@ -25,9 +25,17 @@ public class BoardController {  @Autowired private BoardService boardService; //
 //    }
 
     // [2] 게시물 전체 조회 - 카테고리별 + 페이징처리까지
+//    @GetMapping("/board/findall.do")
+//    public PageDto boardFindAll(@RequestParam int cno, @RequestParam int page){ // 조회할 카테고리번호
+//        return boardService.boardFindAll( cno, page );
+//    }
+
+    // [2] 게시물 전체 조회 - 카테고리별 + 페이징처리 + 검색까지
     @GetMapping("/board/findall.do")
-    public PageDto boardFindAll(@RequestParam int cno, @RequestParam int page){ // 조회할 카테고리번호
-        return boardService.boardFindAll( cno, page );
+    public PageDto boardFindAll(@RequestParam int cno, @RequestParam int page, @RequestParam String key, @RequestParam String keyword){
+        // key : 검색할 데이터의 속성명(btitle, bcontent)
+        // keyword: 검색할 단어
+        return boardService.boardFindAll( cno, page, key, keyword);
     }
 
     // [3] 게시물 특정(개별) 조회

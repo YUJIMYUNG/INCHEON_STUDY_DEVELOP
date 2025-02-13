@@ -87,7 +87,69 @@ public class BoardService {
 //    } // f end
 
     // [2] 게시물 전체 조회 - 카테고리+ 페이지번호 받아올 때
-    public PageDto boardFindAll(int cno, int page ){
+//    public PageDto boardFindAll(int cno, int page ){
+//        System.out.println("con" + cno); // 카테고리번호
+//        System.out.println("page" + page); // 페이지번호
+//
+//        // 페이징처리 방법 : 1. sql, 2. 라이브러리(JPA)
+//        // 1. 페이징 처리 설정, PageRequest.og(페이지번호, 페이지당개수, 정렬);
+//        Pageable pageable = PageRequest.of(page-1, 10, Sort.by(Sort.Direction.DESC, "bno"));
+//
+//        // 2. find~~~(pageable) : 매개변수로 설정 넣어주면 반환값은 Page
+//        // (1) 모든 게시물의 엔티티를 조회 + 페이징처리
+//        //Page< BoardEntity > boardEntityList = boardRepository.findAll(pageable);
+//
+//        // (1-1) 특정한 카테고리의 엔티티조회하고 페이징처리
+//        Page<BoardEntity> boardEntityList = boardRepository.findByCategoryEntity_Cno(cno, pageable);
+//
+//        // * cno 이용한 동일한 cno의 게시물정보 찾기.
+//        // (2) 모든 게시물의 엔티티를 DTO로 변환
+//        // - DTO를 저장할 리스트선언
+//        List<BoardDto> boardDtoList = new ArrayList<>();
+//        // - 반복문 이용하여 모든 엔티티를 dto로 변환하기
+//        // [1] 리스트변수명.forEach( 반복변수명 -> { 실행문; } );
+//        boardEntityList.forEach( entity -> {
+//            // [2] 엔티티 --> dto 변환
+//            // * 만약에 현재 조회중인 게시물의 카테고리가 선택한 카테고리와 같다면
+//            if( entity.getCategoryEntity().getCno() == cno ) {
+//                BoardDto boardDto = entity.toDto();
+//                // [3] 변환된 dto 를 dtolist 리스트에 담는다.
+//                boardDtoList.add( boardDto );
+//            }else{ }
+//        });
+//
+//        // 페이징처리된 게시물 정보(자료) 외 페이징 정보도 같이 반환한다.
+//        // 1) 현재 페이지 번호 = page
+//        // 2) 전체 페이지 번호 = getTotalPages() : 조회된 정보의 전체 페이지수 반환해주는 함수
+//        int totalPage =boardEntityList.getTotalPages();
+//        // 3) 전체 조회된 수  getTotalElements() : 조회된 정보의 전체 수를 반환해주는 함수
+//        long totalCount = boardEntityList.getTotalElements();
+//        // 4) 조회 페이징버튼 시작번호
+//        // 페이지당 표시할 페이지 버튼 수
+//        int btnSize = 5;
+//        int startBtn = ( (page -1) / btnSize ) * btnSize + 1 ;
+//        // 5) 조회 페이지의 페이징버튼 끝번호
+//        int endBtn = startBtn + ( btnSize -1 );
+//
+//        // 페이지버튼 끝번호는 전체 페이지수보다 커길 수 없다.
+//        if(endBtn >= totalPage ) endBtn = totalPage;
+//
+//        // 페이징DTO를 이용한 페이징정보와 자료를 같이 응답/리턴하기
+//        PageDto pageDto = PageDto.builder()
+//                .totalcount(totalCount)
+//                .page(page)
+//                .startbtn(startBtn)
+//                .endbtn(endBtn)
+//                .data(boardDtoList)
+//                .totalpage(totalPage)
+//                .build();
+//
+//        return pageDto;
+//    } // f end
+
+
+    // [2] 게시물 전체 조회 - 카테고리+ 페이지번호 + 검색
+    public PageDto boardFindAll(int cno, int page, String key, String keyword ){
         System.out.println("con" + cno); // 카테고리번호
         System.out.println("page" + page); // 페이지번호
 
@@ -95,12 +157,8 @@ public class BoardService {
         // 1. 페이징 처리 설정, PageRequest.og(페이지번호, 페이지당개수, 정렬);
         Pageable pageable = PageRequest.of(page-1, 10, Sort.by(Sort.Direction.DESC, "bno"));
 
-        // 2. find~~~(pageable) : 매개변수로 설정 넣어주면 반환값은 Page
-        // (1) 모든 게시물의 엔티티를 조회 + 페이징처리
-        //Page< BoardEntity > boardEntityList = boardRepository.findAll(pageable);
-
         // (1-1) 특정한 카테고리의 엔티티조회하고 페이징처리
-        Page<BoardEntity> boardEntityList = boardRepository.findByCategoryEntity_Cno(cno, pageable);
+        Page<BoardEntity> boardEntityList = boardRepository.findBySearch(cno, key, keyword, pageable);
 
         // * cno 이용한 동일한 cno의 게시물정보 찾기.
         // (2) 모든 게시물의 엔티티를 DTO로 변환
