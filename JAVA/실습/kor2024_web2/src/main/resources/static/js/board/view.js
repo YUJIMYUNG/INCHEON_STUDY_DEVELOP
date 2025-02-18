@@ -13,7 +13,7 @@ const onFind = () => {
     const bno = new URL(location.href).searchParams.get('bno');
 
     //2. fetch
-    fetch('/boar/find.do?bno=${bno}')
+    fetch('/board/find.do?bno=${bno}')
         .then(r=> r.json)
         .then(data => {
             console.log(data);

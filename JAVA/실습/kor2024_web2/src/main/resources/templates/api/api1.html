@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+     <!-- 헤더 html 플러그인  -->
+     <div th:replace="~{ /header.html :: header }"> </div>
+    
+
+
+     <div class="container">
+
+        <h3>부평구 남자인구수, 여자인구수 차트 시각화</h3>
+        <div>
+            <canvas class="myChart2"></canvas>
+        </div>
+
+
+        <h3> chart.js를 이용한 시각화</h3>
+        <div>
+            <!-- 차트가 표현되는 구역 -->
+            <canvas id="myChart"></canvas>
+        </div>
+        
+          
+
+
+        <h3>부평구 맛집 현황</h3>
+        
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>연번</th>
+                    <th>업소명</th>
+                    <th>소재지</th>
+                    <th>지정메뉴</th>
+                    <th>전화번호</th>
+                    <th>업태</th>
+                </tr>
+            </thead>
+            <tbody class="boardTable2"></tbody>
+
+        </table>
+
+
+        <h3>사업자번호 진위여부</h3>
+        <input type="text" class="companyInputBox"> 
+        <button type="button" onclick="api2()">검색</button>
+        <div><span class="resultBox"></span></div>
+
+
+        <h3>부평구 인구 현황</h3>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>동별</th>
+                    <th>세대수</th>
+                    <th>인구수(총계)</th>
+                    <th>인구수(남성)</th>
+                    <th>인구수(여성)</th>
+                </tr>
+            </thead>
+            <tbody class="boardTable1"></tbody>
+        </table>
+     </div>
+
+
+
+     <!-- chart.js를 사용하기 위한 라이브러리 -->
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+     <script src="/js/api/api1.js"></script>
+    
+</body>
+</html>

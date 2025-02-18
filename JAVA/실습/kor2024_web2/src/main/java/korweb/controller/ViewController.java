@@ -59,6 +59,12 @@ public class ViewController {
     }
 
 
+    // 공공데이터 API페이지 반환 메서드
+    @GetMapping("/api1")
+    public String api1() {
+        return "/api/api1.html";
+    }
+
 
 
 }

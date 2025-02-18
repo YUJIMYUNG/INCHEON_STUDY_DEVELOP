@@ -248,7 +248,7 @@ public class BoardService {
 
             // (6) dto 결과 반환
             return boardDto;
-        }
+        }// if end
         return null; // 조회 결과 엔티티가 없으면 null 반환
     }
 
