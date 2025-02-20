@@ -70,6 +70,12 @@ public class ViewController {
         return "/api/api2.html";
     }
 
+    //chat
+    @GetMapping("/chat")
+    public String chat() {
+        return "/api/chat.html";
+    }
+
 
 
 }
