@@ -1,9 +1,9 @@
 package korweb.config;
 
+import korweb.controller.AlramServerSocket;
 import korweb.controller.ChatServerSocket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
@@ -14,10 +14,13 @@ public class WebSocketConfig implements WebSocketConfigurer {
 
     // 서버 소켓 역할을 하는 컨트롤러 클래스/겍체 생성
     @Autowired private ChatServerSocket chatServerSocket;
+    @Autowired private AlramServerSocket alramServerSocket;
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         //registry.addHandler(매핑할클래스객체 변수명, "서버소켓주소정의");
         registry.addHandler(chatServerSocket, "/socket/server"); // HTTP의 매핑 주소와 중복이 불가능
+
+        registry.addHandler(alramServerSocket, "/socket/server2");
     }
 }

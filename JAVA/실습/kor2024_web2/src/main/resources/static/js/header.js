@@ -1,3 +1,49 @@
+// ==================== 웹소켓 활용 알림기능 =======================
+
+// 부트스트랩- toast 기능
+const toastTrigger = document.getElementById('liveToastBtn')
+const toastLiveExample = document.getElementById('liveToast')
+
+if (toastTrigger) {
+  const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+  toastTrigger.addEventListener('click', () => {
+    toastBootstrap.show()
+  })
+}
+
+
+
+// 1. 클라이언트 웹소켓
+const clientSocket = new WebSocket('ws://localhost:8080/socket/server2');
+console.log("로그인알림 클라이언트 웹소켓" + clientSocket);
+
+// 2. 클라이언트 웹소켓 속성
+    // 만약에 클라이언트 웹소켓이 서버소켓과 연결을 성공했을 때 실행될 때
+clientSocket.onopen = (event) => {
+    console.log('로그인알림 서버소켓 연동 성공')
+}
+
+clientSocket.onclose = (event) => {
+    console.log('로그인알림 서버소켓과 연동이 닫힘')
+}
+
+clientSocket.onerror = (event) => {
+    console.log('로그인알림 서버소켓과 에러 발생')
+}
+
+clientSocket.onmessage = (event) => {
+    console.log('로그인알림 서버소켓으로부터 메세지를 받음')
+    console.log(event.data);
+}
+
+
+
+
+
+
+
+
+// ==================== 로그인 / 회원가입 ========================
 
 
 // 1. 로그인 정보 요청 함수

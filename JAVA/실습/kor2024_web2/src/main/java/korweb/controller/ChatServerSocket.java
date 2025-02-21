@@ -23,6 +23,8 @@ public class ChatServerSocket extends TextWebSocketHandler {
 
         // 만약에 클라이언트소켓이 서버소켓과 연동을 성공하면 리스트 담기
         connectList.add(session);
+
+        // 클라이언트
     }
 
     @Override
