@@ -18,7 +18,7 @@ public class MemberEntity extends BaseTime {
     @Column(columnDefinition = "varchar(20)", unique = true, nullable = false)
     private String mid; // 회원아이디
 
-    @Column(columnDefinition = "varchar(30)", nullable = false)
+    @Column(columnDefinition = "varchar(100)", nullable = false)
     private String mpwd; // 회원비밀번호
 
     @Column(columnDefinition = "varchar(20)", nullable = false)
