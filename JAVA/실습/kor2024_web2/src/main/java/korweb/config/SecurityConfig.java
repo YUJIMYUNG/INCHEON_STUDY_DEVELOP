@@ -63,6 +63,7 @@ public class SecurityConfig {
         );
 
         // 6. 시큐리티 로그아웃 (시큐리티에서 제공하는 로그아웃 기능 커스텀)
+            // 1). 시큐리티 설정클래스에서 로그인 관련된 설정 코드를 작성한다.
         http.logout(logoutform ->
                 logoutform
                         .logoutUrl("/member/logout.do")          // 로그아웃 요청할 url : GET 방식
@@ -70,6 +71,7 @@ public class SecurityConfig {
                         .invalidateHttpSession(true)            // 로그아웃 성공시 (로그인) 세션 초기화
 
         );
+            // 2).로그인시 암호화된 패스워드를 검증할 암호화 클래스
 
         // 7. 로그인을 처리할 서비스 객체 정의
         http.userDetailsService(memberService);
@@ -81,8 +83,12 @@ public class SecurityConfig {
 
     // 2. 암호화 : 시큐리티가 회원 패스워드 검증(로그인)할 때 사용할 암호화 객체
     // 개발자가 직접 암호화를 비교하지 않고, 시큐리티가 자동으로 암호화를 비교한다.(로그인처리 자동)
-    @Bean // 스프링 컨테이너에 메소드 등록 , PasswordEncoder : 시큐리티가 로그인할 때 사용할 암호화 인코딩 객체
+    @Bean // 스프링 컨테이너에 메소드 등록, 암호화해서 사용된 클래스를 그대로 정의한다./ PasswordEncoder : 시큐리티가 로그인할 때 사용할 암호화 인코딩 객체
     public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
     }
+
+
+
+
 }
