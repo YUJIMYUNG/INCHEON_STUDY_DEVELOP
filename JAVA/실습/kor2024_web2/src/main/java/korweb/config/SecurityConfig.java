@@ -1,14 +1,21 @@
 package korweb.config;
 
+import korweb.service.MemberService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration // 스프링 컨테이너의 빈 등록
 public class SecurityConfig {
+
+    @Autowired
+    MemberService memberService;
 
     // 1. 시큐리티의 필터 정의하기
     @Bean // 필드 또는 메소드에 빈 등록하는 방법
@@ -32,7 +39,50 @@ public class SecurityConfig {
         // http.csrf( csrf -> csrf.ignoringRequestMatchers("csrf예외할URL") );
         // http.csrf( csrf -> csrf.ignoringRequestMatchers("/member/signup.do") ); // 회원가입 POST 예외
 
+        // 5. 시큐리티 로그인 (시큐리티에서 제공하는 로그인 기능 커스텀)
+        // JSON 형식이 아닌 Form 형식으로 지원
+        http.formLogin( loginform ->
+                loginform
+                        .loginPage("/member/login")             // 로그인할 view page url 정의
+                        .loginProcessingUrl("/member/login.do") // 로그인을 처리할 URL 정의 : POST 방식
+                        .usernameParameter("mid")               // 로그인에 사용할 id 변수명
+                        .passwordParameter("mpwd")              // 로그인에 사용할 password 변수
+                        //.defaultSuccessUrl("/")                 // 로그인 성공시 이동할 page url 정의
+                        //.failureUrl("/member/login")     // 로그인 실패시 이동할 page url 정의
+                        // fetch/axios 처리에서는 아래와같이 사용
+                        .successHandler((request, response, exception) -> {
+                            System.out.println("로그인 성공!!!");
+                            response.setContentType("application/json");    // 응답 방식을 JSON으로 변경
+                            response.getWriter().println("true");           //JSON 형식의 true 응답
+                        })
+                        .failureHandler((request, response, exception) -> {
+                            System.out.println("로그인 실패!!!");
+                            response.setContentType("application/json");
+                            response.getWriter().println("false");
+                        })
+        );
+
+        // 6. 시큐리티 로그아웃 (시큐리티에서 제공하는 로그아웃 기능 커스텀)
+        http.logout(logoutform ->
+                logoutform
+                        .logoutUrl("/member/logout.do")          // 로그아웃 요청할 url : GET 방식
+                        .logoutSuccessUrl("/")                  // 로그아웃 성공시 이동할 page url 정의
+                        .invalidateHttpSession(true)            // 로그아웃 성공시 (로그인) 세션 초기화
+
+        );
+
+        // 7. 로그인을 처리할 서비스 객체 정의
+        http.userDetailsService(memberService);
+
         // 2. http 객체를 빌드/실행하여 보안 필터 체인을 생성
         return http.build();
+    }
+
+
+    // 2. 암호화 : 시큐리티가 회원 패스워드 검증(로그인)할 때 사용할 암호화 객체
+    // 개발자가 직접 암호화를 비교하지 않고, 시큐리티가 자동으로 암호화를 비교한다.(로그인처리 자동)
+    @Bean // 스프링 컨테이너에 메소드 등록 , PasswordEncoder : 시큐리티가 로그인할 때 사용할 암호화 인코딩 객체
+    public PasswordEncoder encoder() {
+        return new BCryptPasswordEncoder();
     }
 }

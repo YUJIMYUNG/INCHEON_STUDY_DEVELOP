@@ -28,10 +28,12 @@ public class MemberController {
         return memberService.signup(memberDto);
     }
 
-    @PostMapping("/member/login.do")
-    public boolean login(@RequestBody MemberDto memberDto){
-        return memberService.login(memberDto);
-    }
+    // security 사용시에는 아래 기능 사용하지 않음
+    // 2. 로그인
+//    @PostMapping("/member/login.do")
+//    public boolean login(@RequestBody MemberDto memberDto){
+//        return memberService.login(memberDto);
+//    }
 
     // 3. 현재 로그인된 회원 아이디 http 매핑
     @GetMapping("/member/login/id.do")
@@ -39,11 +41,12 @@ public class MemberController {
         return memberService.getSession();
     }
 
+    // security 사용시에는 아래 기능 사용하지 않음
     // 4. 현재 로그인된 회원 로그아웃
-    @GetMapping("/member/logout.do")
-    public boolean logout() {
-        return memberService.deleteSession();
-    }
+//    @GetMapping("/member/logout.do")
+//    public boolean logout() {
+//        return memberService.deleteSession();
+//    }
 
     // 5. 현재 로그인된 회원 정보 반환
     @GetMapping("/member/login/myinfo.do")
