@@ -76,6 +76,15 @@ public class SecurityConfig {
         // 7. 로그인을 처리할 서비스 객체 정의
         http.userDetailsService(memberService);
 
+        // 8. 시큐리티에서 Oauth2 로그인 페이지와 (커스텀/오버라이딩/재정의) 서비스 정의
+        http.oauth2Login(oauth2Login -> {
+            oauth2Login
+                    .loginPage("/member/login")
+                    .userInfoEndpoint(userinfo -> {
+                        userinfo.userService(memberService); // oauth2에서 로그인 성공시 유저 정보를 받을 객체 정의
+                    });
+        });
+
         // 2. http 객체를 빌드/실행하여 보안 필터 체인을 생성
         return http.build();
     }

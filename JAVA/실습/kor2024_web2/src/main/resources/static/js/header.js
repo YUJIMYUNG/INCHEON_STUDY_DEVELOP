@@ -66,7 +66,7 @@ const getLoginMid = () => {
             html += `
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 memberBox">
                 <li class="nav-item"> 
-                    <img src="/img/${data.mimg}" style="width:70px; border-radius:20px; padding :1px; object-fit:cover; border:1px solid #bfbebe;" />
+                    <img src="${data.mimg.includes('http') ? data.mig : "/img/"+data.mimg}" style="width:70px; border-radius:20px; padding :1px; object-fit:cover; border:1px solid #bfbebe;" />
                     ${data.mid} 님
                     <span class="pointbox"></span>
                     </li>

@@ -15,13 +15,23 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
+import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
+import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
-public class MemberService implements UserDetailsService {
+public class MemberService implements UserDetailsService , OAuth2UserService<OAuth2UserRequest, OAuth2User> {
+
+
 
     @Autowired
     private MemberRepository memberRepository;
@@ -143,6 +153,61 @@ public class MemberService implements UserDetailsService {
         return user;
     }
 
+
+    // 시큐리티 oauth2 메소드 재정의(커스텀)
+    @Override
+    public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
+        // 1) loadUser 메소드란 : oauth2로 각 소셜 페이지에서 로그인 성공시 실행되는 메소드, 로그인 성공후 유저 정보 반환
+        System.out.println("userRequest" +userRequest); // user정보 반환 요청 객체
+
+        // 2) 로그인을 성공한 oauth2의 사용자 정보(동의항목) 정보 반환
+        OAuth2User oAuth2User = new DefaultOAuth2UserService().loadUser(userRequest);
+        System.out.println("oAuth2User" + oAuth2User);
+
+        // 3). 로그인한 모든 정보 반환, oauth2 회사명 반환 (카카오, 네이버, 구글)
+        String registrationId = userRequest.getClientRegistration().getRegistrationId();
+        System.out.println("registrationId" + registrationId);
+
+        // 4). 각 회사명별 유저의 정보 반환하는 방법이 다르다.
+        String nickname = null;
+        String img = null;
+        Map<String, Object> profile = null;
+        if(registrationId.equals("kakao")) {
+            // 5). 로그인 성공한 카카오 회원의 정보 가져오기
+            Map<String, Object> kakaoAccount = (Map<String, Object>)oAuth2User.getAttributes().get("kakao_account");
+            // 6). 세부 회원정보 가져오기
+            profile = (Map<String, Object>) kakaoAccount.get("profile");
+            // 7) 각 정보 가져오기
+            nickname = profile.get("nickname").toString();
+            img = profile.get("profile_image_url").toString();
+
+            // 8) 만약에 최초 로그인이면 회원 DB에 저장
+            if(memberRepository.findByMid(nickname) == null) { // 만약에 DB에 로그인한 카카오 닉네임이 없으면 DB에 저장
+                // * nickname을 mid로 대체
+                // DB에 저장할 entity 구성
+                MemberEntity memberEntity = MemberEntity.builder()
+                        .mid(nickname) // 실제 카카오 이메일을 가져올 수 없으므로 닉네임을 대체한다. (비지니스-사업자등록 있으면 사용 가능)
+                        .mname(nickname)
+                        .memail(nickname)
+                        .mimg(img) // 실제 카카오 이메일을 가져올 수 없으므로 닉네임을 대체한다.
+                        .mpwd(new BCryptPasswordEncoder().encode("1234")) // 실제 카카오 회원의 비밀번호는 절대 못가져오므로 임의의 비밀번호를 만든다.OAUTH회원은 비밀번호를 사용하지 않음
+                        .build();
+                memberRepository.save(memberEntity); //DB에 entity 저장
+
+            }
+        } else if(registrationId.equals("naver")){
+
+        } else if(registrationId.equals("google")){
+
+        }
+
+        // 9) DefaultOauth2User 타입으로 리턴
+        // 매개변수 3개 ( 1. 권한목록 2. 사용자정보 3. 식별키)
+        DefaultOAuth2User user = new DefaultOAuth2User(null, profile, "nickname");
+
+        return user;
+    }
+
     // ===================== 세션 관련 함수 ============== //
     // (1) 내장된 톰캣 서버의 요청 객체
     @Autowired private HttpServletRequest request;
@@ -173,11 +238,18 @@ public class MemberService implements UserDetailsService {
         } // if end
 
         // 3). 로그인 상태이면 로그인 구현할때 'loginByUsername' 메소드 반환한 userDetails로 타입 변환
-        UserDetails userDetails = (UserDetails) object;
-
-        // 4). 로그인된 정보에서 mid를 꺼낸다.
-        String loginMid = userDetails.getUsername(); // Username == mid
-
+            // UserDetails = 일반 회원 타입 vs Oauth2User - Oauth회원 타입 (통합해야한다)
+        // 4). 로그인 정보에서 mid를 꺼낸다.
+        String loginMid = null;
+        if(object instanceof UserDetails) { // 객체 instanceof 타입 : 객체가 지정한 타입인지 확인하는 키워드, 객체가 해당 타입이면 true, 아니면 false
+            // 현재 로그인 세션이 UserDetails(일반회원) 이면
+            UserDetails userDetails = (UserDetails) object;
+            loginMid  = userDetails.getUsername();
+        } else if (object instanceof DefaultOAuth2User) {
+            DefaultOAuth2User defaultOAuth2User = (DefaultOAuth2User)  object;
+            loginMid = defaultOAuth2User.getAttributes().get("nickname").toString();
+        }
+        
         // 5). 로그인 mid 반환
         return loginMid;
     }
