@@ -3,6 +3,7 @@ package korweb.service;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
+import korweb.model.dto.LoginDto;
 import korweb.model.dto.MemberDto;
 import korweb.model.dto.PointDto;
 import korweb.model.entity.MemberEntity;
@@ -147,10 +148,20 @@ public class MemberService implements UserDetailsService , OAuth2UserService<OAu
             // User : 클래스, UserDetails를 구현하는 구현(객)체
             // --> 시큐리티는 UserDetails를 반환하면 자동으로 로그인 처리르 해준다.
             // 단! 입력받은 id와 입력받은 id의 암호화된 패스워드를 대입해줘야 한다.
-        UserDetails user = User.builder().username(mid).password(password).build();
+//        UserDetails user = User.builder().username(mid).password(password).build();
 
         // 5). UserDetails를 반환
-        return user;
+//        return user;
+//
+
+        //
+        LoginDto loginDto = LoginDto.builder()
+                .mid(mid)
+                .mpwd(password)
+                .build();
+        return loginDto; // 반환타입이 UserDetails이지만 loginDto에서 구현했으므로 반환 가능
+
+
     }
 
 
@@ -203,9 +214,13 @@ public class MemberService implements UserDetailsService , OAuth2UserService<OAu
 
         // 9) DefaultOauth2User 타입으로 리턴
         // 매개변수 3개 ( 1. 권한목록 2. 사용자정보 3. 식별키)
-        DefaultOAuth2User user = new DefaultOAuth2User(null, profile, "nickname");
+//        DefaultOAuth2User user = new DefaultOAuth2User(null, profile, "nickname");
 
-        return user;
+        LoginDto loginDto = LoginDto.builder()
+                .mid(nickname)
+                //oauth2회원은 password 없으므로 생략
+                .build();
+        return loginDto; // 현재 메소드의 반환타입이 Oauth2User 이지만 LoginDto에서 Oauth2User를 구현했으므로 반환 가능
     }
 
     // ===================== 세션 관련 함수 ============== //
@@ -241,15 +256,21 @@ public class MemberService implements UserDetailsService , OAuth2UserService<OAu
             // UserDetails = 일반 회원 타입 vs Oauth2User - Oauth회원 타입 (통합해야한다)
         // 4). 로그인 정보에서 mid를 꺼낸다.
         String loginMid = null;
-        if(object instanceof UserDetails) { // 객체 instanceof 타입 : 객체가 지정한 타입인지 확인하는 키워드, 객체가 해당 타입이면 true, 아니면 false
-            // 현재 로그인 세션이 UserDetails(일반회원) 이면
-            UserDetails userDetails = (UserDetails) object;
-            loginMid  = userDetails.getUsername();
-        } else if (object instanceof DefaultOAuth2User) {
-            DefaultOAuth2User defaultOAuth2User = (DefaultOAuth2User)  object;
-            loginMid = defaultOAuth2User.getAttributes().get("nickname").toString();
-        }
-        
+
+        //  LoginDto 구현 전
+//        if(object instanceof UserDetails) { // 객체 instanceof 타입 : 객체가 지정한 타입인지 확인하는 키워드, 객체가 해당 타입이면 true, 아니면 false
+//            // 현재 로그인 세션이 UserDetails(일반회원) 이면
+//            UserDetails userDetails = (UserDetails) object;
+//            loginMid  = userDetails.getUsername();
+//        } else if (object instanceof DefaultOAuth2User) {
+//            DefaultOAuth2User defaultOAuth2User = (DefaultOAuth2User)  object;
+//            loginMid = defaultOAuth2User.getAttributes().get("nickname").toString();
+//        }
+
+        // LoginDto 구현 후
+        LoginDto loginDto = (LoginDto) object;
+        loginMid = loginDto.getMid(); // UserDetails 회원과 OauthUser인지 구분하지 않아도 됨
+
         // 5). 로그인 mid 반환
         return loginMid;
     }
