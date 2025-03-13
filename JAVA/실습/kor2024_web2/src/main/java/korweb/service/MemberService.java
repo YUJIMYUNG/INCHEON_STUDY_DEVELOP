@@ -11,6 +11,8 @@ import korweb.model.entity.PointEntity;
 import korweb.model.repository.MemberRepository;
 import korweb.model.repository.PointRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -152,12 +154,19 @@ public class MemberService implements UserDetailsService , OAuth2UserService<OAu
 
         // 5). UserDetails를 반환
 //        return user;
-//
+
+        // * 권한 부여 , GrantedAuthority : 시큐리티 사용자의 권한을 조작하는 인터페이스
+            // SimpleGrantedAuthority : 시큐리티 사용자의 권한 클래스(구현체)
+        List< GrantedAuthority > rnjsgksahrfhr = new ArrayList<>();
+        rnjsgksahrfhr.add(new SimpleGrantedAuthority("ROLE_USER")); // 권한면 규칙 : ROLE_권한명(대문자)
+        rnjsgksahrfhr.add(new SimpleGrantedAuthority("ROLE_GENERAL")); // 권한은 여러개 넌을 수 있다.
+        // 추후에 DB에 존재하는 권한을 부여할 수 있다.
 
         //
         LoginDto loginDto = LoginDto.builder()
                 .mid(mid)
                 .mpwd(password)
+                .mrolList(rnjsgksahrfhr) // loginDto에 권한목록 넣어준다.
                 .build();
         return loginDto; // 반환타입이 UserDetails이지만 loginDto에서 구현했으므로 반환 가능
 
@@ -216,9 +225,15 @@ public class MemberService implements UserDetailsService , OAuth2UserService<OAu
         // 매개변수 3개 ( 1. 권한목록 2. 사용자정보 3. 식별키)
 //        DefaultOAuth2User user = new DefaultOAuth2User(null, profile, "nickname");
 
+        // 권한 부여하기
+        List<GrantedAuthority> rnjsgksahrfhr = new ArrayList<>();
+        rnjsgksahrfhr.add(new SimpleGrantedAuthority("ROLE_USER"));
+        rnjsgksahrfhr.add(new SimpleGrantedAuthority("ROLE_OAUTH"));
+
         LoginDto loginDto = LoginDto.builder()
                 .mid(nickname)
                 //oauth2회원은 password 없으므로 생략
+                .mrolList(rnjsgksahrfhr) // LoginDto에 권한목록 넣어주기
                 .build();
         return loginDto; // 현재 메소드의 반환타입이 Oauth2User 이지만 LoginDto에서 Oauth2User를 구현했으므로 반환 가능
     }

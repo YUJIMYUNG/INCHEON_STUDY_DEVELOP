@@ -6,6 +6,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ViewController {
 
+    // * 403(권한 접근 차단 매핑)
+    @GetMapping("/error403")
+    public String error403() {
+        return "/error403.html";
+    }
+
+
+
+    //=============================================================
+
     @GetMapping("")
     // http://localhost:8080/
     public String index(){
@@ -75,6 +85,8 @@ public class ViewController {
     public String chat() {
         return "/api/chat.html";
     }
+
+
 
 
     /*
