@@ -103,25 +103,33 @@ const getLoginMid = () => {
 // JS 실행될 때, 로그인 정보 요청 함수 호출
 getLoginMid();
 
-// 로그아웃 함수
-const logout = () =>{
-    console.log("로그아웃")
 
-    const option = {method : 'GET'}
-    fetch('/member/logout.do', option)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            if(data == true) {
-                alert('로그아웃 성공')
-                location.href= '/';
-                getLoginMid(); // 헤더 상태를 다시불러오기
-            } else {
-                alert("로그인 실패")
-            } // if-else end
-        })
-        .catch(error => console.log(error));
-}// logout()end
+// 시큐리티 이후 로그아웃
+const logout = () => {
+    // 시큐리티 이후에는 fetch로 로그아웃이 아닌 get방식으로 시큐리티 로그아웃을 처리한다.
+    location.href = "/member/logout.do";
+}
+
+// 시큐리티 전
+// 로그아웃 함수
+// const logout = () =>{
+//     console.log("로그아웃")
+
+//     const option = {method : 'GET'}
+//     fetch('/member/logout.do', option)
+//         .then(response => response.json())
+//         .then(data => {
+//             console.log(data);
+//             if(data == true) {
+//                 alert('로그아웃 성공')
+//                 location.href= '/';
+//                 getLoginMid(); // 헤더 상태를 다시불러오기
+//             } else {
+//                 alert("로그인 실패")
+//             } // if-else end
+//         })
+//         .catch(error => console.log(error));
+// }// logout()end
 
 
 // [3] 내 포인트 함수
